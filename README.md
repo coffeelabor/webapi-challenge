@@ -39,14 +39,24 @@ Commit your code regularly and use descriptive messages. This helps both you (in
 Demonstrate your understanding of this Sprint's concepts by answering the following free-form questions. Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your Team Lead.
 
 - [ ] Mention two parts of Express that you learned about this week.
+        
+       One of the features of express is that it gives routing the added functionality of Middleware. Another is that RESTful services can work with JSON
 
 - [ ] What is Express Middleware?
+        
+       As described in lecture middleware is like an assembly line that the server code runs through with each stop on the line (i.e. a middleware function) either adds or checks the code.
 
 - [ ] How can a client send data to an API?
 
+      A client can send data by doing a POST which creates data, a PUT which updates data, and a DELETE which removes data
+
 - [ ] What can the API return to help clients know if a request was successful?
 
+      A status(200) can be sent to show that the request was successful
+
 - [ ] What Express feature can we use to partition an application into sub-applications?
+
+      The application can be split up by adding middleware and error handling.  This allows the code to be dry by calling redundant code that may be used in multiple places
 
 ## Minimum Viable Product
 

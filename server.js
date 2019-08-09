@@ -73,7 +73,7 @@ server.put("/chores/:id", (req, res) => {
   }
 });
 
-server.delete("/chores", (req, res) => {});
+server.delete("/chores/:id", (req, res) => {});
 
 // Write an endpoint that accepts a person's id and returns the list of chores for the person. if a person with that id does not exist in the people array, the endpoint should return a 404 status code and a message. If the person exists, but has no chores assigned, return an empty array.
 
