@@ -51,6 +51,12 @@ server.get("/chores", (req, res) => {
   res.status(200).json(chores);
 });
 
+server.get("/chores/task", (req, res) => {
+  const isCompleted = req.query.task;
+  const done = chores.completed.filter(complete => chores.completed === true);
+  res.status(200).json(done);
+});
+
 server.post("/chores", (req, res) => {
   //   const { description, assignedTo, completed } = req.body;
   const chore = req.body;
