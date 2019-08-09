@@ -53,7 +53,7 @@ server.get("/chores", (req, res) => {
 
 server.get("/chores/task", (req, res) => {
   const isCompleted = req.query.task;
-  const done = chores.completed.filter(complete => chores.completed === true);
+  const done = chores.completed.filter(isCompleted === true);
   res.status(200).json(done);
 });
 
