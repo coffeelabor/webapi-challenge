@@ -46,22 +46,55 @@ let nextId = people.length + 1;
 // Write endpoints to manage(CRUD) chores.
 
 server.get("/chores", (req, res) => {
-  // const queryParameters = req.query;
-  // res.status(200).json(queryParameters);
   res.status(200).json(chores);
 });
 
-server.get("/chores/task", (req, res) => {
-  const isCompleted = req.query.task;
-  const done = chores.completed.filter(isCompleted === true);
-  res.status(200).json(done);
+server.get("/chores/:id", (req, res) => {
+  const chore = chores.find(chore => chore.id === Number(req.params.id));
+  if (chore) {
+    res.status(200).json(chore);
+  } else {
+    res.status(400).json({ message: "chore not found" });
+  }
+});
+
+server.get("/chores", (req, res) => {
+  const completed = req.query.completed;
+  console.log(completed);
+  const filter = completed === "true" ? true : false;
+  if (completed) {
+    const result = chores.filter(chore => chore.completed === filter);
+    res.status(200).json(result);
+  } else {
+    res.status(200).json(chores);
+  }
+});
+
+server.get("/people/:id/chores", (req, res) => {
+  const person = people.find(
+    peepId => peepId.people_id === Number(req.params.id)
+  );
+  const chore = chores.filter(
+    choreId => choreId.assignedTo === person.people_id
+  );
+  //   console.log(person.people_id);
+  //   const chore = chores.find()
+  if (person) {
+    if (chore) {
+      res.status(200).json(chore);
+    } else {
+      return [];
+    }
+  } else {
+    res.status(400).json({ message: "person not found" });
+  }
 });
 
 server.post("/chores", (req, res) => {
   //   const { description, assignedTo, completed } = req.body;
   const chore = req.body;
-  //   chores.id = nextId;
   if (chore.description || chore.assignedTo || chore.completed) {
+    chores.id = nextId;
     chores.push(chore);
     res.status(201).json(chores);
   } else {
@@ -79,7 +112,11 @@ server.put("/chores/:id", (req, res) => {
   }
 });
 
-server.delete("/chores/:id", (req, res) => {});
+server.delete("/chores/:id", (req, res) => {
+  chores = chores.filter(chore => chore.id !== Number(req.params.id));
+
+  res.status(201).json;
+});
 
 // Write an endpoint that accepts a person's id and returns the list of chores for the person. if a person with that id does not exist in the people array, the endpoint should return a 404 status code and a message. If the person exists, but has no chores assigned, return an empty array.
 
